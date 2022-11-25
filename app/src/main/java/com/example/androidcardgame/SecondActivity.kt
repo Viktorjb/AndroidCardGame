@@ -35,5 +35,13 @@ class SecondActivity : AppCompatActivity() {
         coinText.text = "Total Coins: " + i
     }
 
+    fun removeCoins(i : Int){
+        coins -= i
+    }
+
+    fun addCoins(i : Int){
+        coins += i
+    }
+
 
 }
