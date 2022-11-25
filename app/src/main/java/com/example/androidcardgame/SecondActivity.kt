@@ -19,7 +19,7 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
 
         coinText = findViewById(R.id.coinsTextView)
-        //coinText.text = "Total Coins: 30"
+
         updateCoins(coins)
 
         enterCoins = findViewById(R.id.enterCoinsEditText)
@@ -27,7 +27,7 @@ class SecondActivity : AppCompatActivity() {
         var hibutton = findViewById<Button>(R.id.hiButton)
         var lobutton = findViewById<Button>(R.id.loButton)
 
-
+        //lägg till kort-class, bilder, metod som visar kort baserat på input i metoden
 
     }
 
