@@ -34,6 +34,12 @@ class SecondActivity : AppCompatActivity() {
 
         //lägg till kort-class, bilder, metod som visar kort baserat på input i metoden
 
+        hibutton.setOnClickListener{
+            
+        }
+
+
+
     }
 
     fun updateCoins(i : Int){
