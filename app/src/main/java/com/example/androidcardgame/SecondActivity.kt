@@ -9,8 +9,10 @@ import android.widget.TextView
 
 class SecondActivity : AppCompatActivity() {
 
-    lateinit var coinText : TextView
-    lateinit var enterCoins : EditText
+    lateinit var coinText : TextView // How many coins the player has
+    lateinit var enterCoins : EditText // How many coins to bet
+
+    val drawables = Drawables() // Hash map of drawables
 
     lateinit var card1 : ImageView
 
@@ -35,7 +37,7 @@ class SecondActivity : AppCompatActivity() {
         //lägg till kort-class, bilder, metod som visar kort baserat på input i metoden
 
         hibutton.setOnClickListener{
-            
+            card1.setImageResource(R.drawable.hearts_1)
         }
 
 

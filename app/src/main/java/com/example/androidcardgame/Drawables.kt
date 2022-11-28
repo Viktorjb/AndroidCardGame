@@ -1,12 +1,15 @@
 package com.example.androidcardgame
 
+import android.graphics.drawable.Drawable
+
 class Drawables {
+    // Hash maps containing all necessary drawables
     var hearts = hashMapOf<Int, Int>()
     var diamonds = hashMapOf<Int, Int>()
     var cloves = hashMapOf<Int, Int>()
     var spades = hashMapOf<Int, Int>()
 
-    init {
+    init { // initialise
         hearts.put(1, R.drawable.hearts_1)
         hearts.put(2, R.drawable.hearts_2)
         hearts.put(3, R.drawable.hearts_3)
