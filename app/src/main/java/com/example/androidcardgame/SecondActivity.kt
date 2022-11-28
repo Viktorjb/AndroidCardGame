@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 
 class SecondActivity : AppCompatActivity() {
@@ -11,12 +12,16 @@ class SecondActivity : AppCompatActivity() {
     lateinit var coinText : TextView
     lateinit var enterCoins : EditText
 
+    lateinit var card1 : ImageView
+
     var coins : Int = 30
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
+
+        card1 = findViewById(R.id.card1imageView)
 
         coinText = findViewById(R.id.coinsTextView)
 
