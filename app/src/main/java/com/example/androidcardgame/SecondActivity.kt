@@ -15,6 +15,7 @@ class SecondActivity : AppCompatActivity() {
     val drawables = Drawables() // Hash map of drawables
 
     lateinit var card1 : ImageView
+    lateinit var card2 : ImageView
 
     var coins : Int = 30
 
@@ -24,6 +25,7 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
 
         card1 = findViewById(R.id.card1imageView)
+        card2 = findViewById(R.id.card2imageView)
 
         coinText = findViewById(R.id.coinsTextView)
 
@@ -38,6 +40,10 @@ class SecondActivity : AppCompatActivity() {
 
         hibutton.setOnClickListener{
             card1.setImageResource(R.drawable.hearts_1)
+        }
+
+        lobutton.setOnClickListener{
+            card2.setImageResource(drawables.hearts[1]!!)
         }
 
 
