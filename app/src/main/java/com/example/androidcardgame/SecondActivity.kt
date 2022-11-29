@@ -30,7 +30,7 @@ class SecondActivity : AppCompatActivity() {
 
         coinText = findViewById(R.id.coinsTextView)
 
-        updateCoins(coins)
+        updateCoins()
 
         enterCoins = findViewById(R.id.enterCoinsEditText)
 
@@ -61,11 +61,18 @@ class SecondActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "Please enter coins", Toast.LENGTH_SHORT).show()
             return
         }
+        showCardFront(2)
+        if (guess == "hi" && c1.number < c2.number || guess == "lo" && c1.number > c2.number){
+            addCoins(enterCoins.text.toString().toInt())
+        } else{
+            removeCoins(enterCoins.text.toString().toInt())
+        }
+        updateCoins()
     }
 
 
-    fun updateCoins(i : Int){
-        coinText.text = "Total Coins: " + i
+    fun updateCoins(){
+        coinText.text = "Total Coins: " + coins
     }
 
     fun removeCoins(i : Int){
