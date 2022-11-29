@@ -2,10 +2,7 @@ package com.example.androidcardgame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 
 class SecondActivity : AppCompatActivity() {
 
@@ -40,14 +37,17 @@ class SecondActivity : AppCompatActivity() {
         var hibutton = findViewById<Button>(R.id.hiButton)
         var lobutton = findViewById<Button>(R.id.loButton)
 
+        randomiseCard(1)
+        randomiseCard(2)
+        showCardFront(1)
+        showCardBack(2)
+
         hibutton.setOnClickListener{
-            randomiseCard(1)
-            showCardFront(1)
+            runBet("hi")
         }
 
         lobutton.setOnClickListener{
-            randomiseCard(2)
-            showCardFront(2)
+            runBet("lo")
         }
 
         // To here
@@ -55,6 +55,14 @@ class SecondActivity : AppCompatActivity() {
 
 
     }
+
+    fun runBet(guess : String){
+        if (enterCoins.text.toString().toIntOrNull() == null){
+            Toast.makeText(applicationContext, "Please enter coins", Toast.LENGTH_SHORT).show()
+            return
+        }
+    }
+
 
     fun updateCoins(i : Int){
         coinText.text = "Total Coins: " + i
