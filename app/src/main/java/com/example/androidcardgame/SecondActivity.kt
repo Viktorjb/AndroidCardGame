@@ -41,11 +41,13 @@ class SecondActivity : AppCompatActivity() {
         var lobutton = findViewById<Button>(R.id.loButton)
 
         hibutton.setOnClickListener{
-            card1.setImageResource(R.drawable.hearts_1)
+            randomiseCard(1)
+            showCardFront(1)
         }
 
         lobutton.setOnClickListener{
-            card2.setImageResource(drawables.hearts[1]!!)
+            randomiseCard(2)
+            showCardFront(2)
         }
 
         // To here
@@ -86,10 +88,10 @@ class SecondActivity : AppCompatActivity() {
             if(c1.suit == "Cloves") card1.setImageResource(drawables.cloves[c1.number]!!)
             if(c1.suit == "Diamonds") card1.setImageResource(drawables.diamonds[c1.number]!!)
         } else if(i == 2){
-            if(c2.suit == "Hearts") card1.setImageResource(drawables.hearts[c2.number]!!)
-            if(c2.suit == "Spades") card1.setImageResource(drawables.spades[c2.number]!!)
-            if(c2.suit == "Cloves") card1.setImageResource(drawables.cloves[c2.number]!!)
-            if(c2.suit == "Diamonds") card1.setImageResource(drawables.diamonds[c2.number]!!)
+            if(c2.suit == "Hearts") card2.setImageResource(drawables.hearts[c2.number]!!)
+            if(c2.suit == "Spades") card2.setImageResource(drawables.spades[c2.number]!!)
+            if(c2.suit == "Cloves") card2.setImageResource(drawables.cloves[c2.number]!!)
+            if(c2.suit == "Diamonds") card2.setImageResource(drawables.diamonds[c2.number]!!)
         }
     }
 
