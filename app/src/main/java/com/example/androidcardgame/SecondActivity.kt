@@ -2,14 +2,13 @@ package com.example.androidcardgame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.os.Handler
+import android.os.Looper
+import android.widget.*
 
 class SecondActivity : AppCompatActivity() {
 
-    lateinit var coinText : TextView // How many coins the player has
+    lateinit var coinText : TextView // How many coins the player has (TextView)
     lateinit var enterCoins : EditText // How many coins to bet
 
     val drawables = Drawables() // Hash map of drawables
@@ -20,7 +19,9 @@ class SecondActivity : AppCompatActivity() {
     var c1 : Card = Card(5,"Spades") // Card object 1
     var c2 : Card = Card(1,"Hearts") // Card object 2
 
-    var coins : Int = 30
+    var coins : Int = 30 // How many coins the player has (raw)
+
+    var wait : Boolean = false // If play is paused
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -33,31 +34,73 @@ class SecondActivity : AppCompatActivity() {
 
         coinText = findViewById(R.id.coinsTextView)
 
-        updateCoins(coins)
+        updateCoins()
 
         enterCoins = findViewById(R.id.enterCoinsEditText)
 
         var hibutton = findViewById<Button>(R.id.hiButton)
         var lobutton = findViewById<Button>(R.id.loButton)
 
+        randomiseCard(1)
+        randomiseCard(2)
+        showCardFront(1)
+        showCardBack(2)
+
         hibutton.setOnClickListener{
-            randomiseCard(1)
-            showCardFront(1)
+            runBet("hi")
         }
 
         lobutton.setOnClickListener{
-            randomiseCard(2)
-            showCardFront(2)
+            runBet("lo")
         }
 
         // To here
 
-
+        //TO DO: Make game lost if coins hit 0,
+        //       Make game look nicer and make sure it works for different screen sizes
+        //       Add animations of some sort?
+        //       Add high-scores?
 
     }
 
-    fun updateCoins(i : Int){
-        coinText.text = "Total Coins: " + i
+    // Main functionality, runs when you click a button
+    fun runBet(guess : String){
+
+        if(wait){   // If wait is true, i.e. if you've just hit a button, return
+            return
+        }
+
+        if (enterCoins.text.toString().toIntOrNull() == null){ //If there are no coins entered
+            Toast.makeText(applicationContext, "Please enter coins", Toast.LENGTH_SHORT).show()
+            return
+        }
+        showCardFront(2) // reveal hidden card, and check if bet is "won"
+        if (guess == "hi" && c1.number < c2.number || guess == "lo" && c1.number > c2.number){
+            addCoins(enterCoins.text.toString().toInt() / 2)
+            Toast.makeText(applicationContext, "Good choice!", Toast.LENGTH_SHORT).show()
+        } else{
+            removeCoins(enterCoins.text.toString().toInt())
+            Toast.makeText(applicationContext, "Too bad!", Toast.LENGTH_SHORT).show()
+        }
+        updateCoins()
+
+        // Set wait to true, so you can't play for a few seconds
+        wait = true
+
+        // After 3 seconds set wait to false and update everything for another round
+        Handler(Looper.getMainLooper()).postDelayed({
+            wait = false
+            flipCards() // flip the cards
+            showCardFront(1) // update left cards front
+            showCardBack(2) // show back of right card
+            randomiseCard(2) // randomise right card
+
+        }, 3000)
+    }
+
+
+    fun updateCoins(){
+        coinText.text = "Total Coins: " + coins
     }
 
     fun removeCoins(i : Int){
