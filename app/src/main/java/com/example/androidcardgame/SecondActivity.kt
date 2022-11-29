@@ -8,7 +8,7 @@ import android.widget.*
 
 class SecondActivity : AppCompatActivity() {
 
-    lateinit var coinText : TextView // How many coins the player has
+    lateinit var coinText : TextView // How many coins the player has (TextView)
     lateinit var enterCoins : EditText // How many coins to bet
 
     val drawables = Drawables() // Hash map of drawables
@@ -19,9 +19,9 @@ class SecondActivity : AppCompatActivity() {
     var c1 : Card = Card(5,"Spades") // Card object 1
     var c2 : Card = Card(1,"Hearts") // Card object 2
 
-    var coins : Int = 30
+    var coins : Int = 30 // How many coins the player has (raw)
 
-    var wait : Boolean = false
+    var wait : Boolean = false // If play is paused
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -60,17 +60,18 @@ class SecondActivity : AppCompatActivity() {
 
     }
 
+    // Main functionality, runs when you click a button
     fun runBet(guess : String){
 
-        if(wait){
+        if(wait){   // If wait is true, i.e. if you've just hit a button, return
             return
         }
 
-        if (enterCoins.text.toString().toIntOrNull() == null){
+        if (enterCoins.text.toString().toIntOrNull() == null){ //If there are no coins entered
             Toast.makeText(applicationContext, "Please enter coins", Toast.LENGTH_SHORT).show()
             return
         }
-        showCardFront(2)
+        showCardFront(2) // reveal hidden card, and check if bet is "won"
         if (guess == "hi" && c1.number < c2.number || guess == "lo" && c1.number > c2.number){
             addCoins(enterCoins.text.toString().toInt() / 2)
             Toast.makeText(applicationContext, "Good choice!", Toast.LENGTH_SHORT).show()
@@ -80,8 +81,10 @@ class SecondActivity : AppCompatActivity() {
         }
         updateCoins()
 
+        // Set wait to true, so you can't play for a few seconds
         wait = true
 
+        // After 3 seconds set wait to false and update everything for another round
         Handler(Looper.getMainLooper()).postDelayed({
             wait = false
             flipCards() // flip the cards
