@@ -84,6 +84,11 @@ class SecondActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             wait = false
+            flipCards() // flip the cards
+            showCardFront(1) // update left cards front
+            showCardBack(2) // show back of right card
+            randomiseCard(2) // randomise right card
+
         }, 3000)
     }
 
