@@ -2,6 +2,8 @@ package com.example.androidcardgame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.*
 
 class SecondActivity : AppCompatActivity() {
@@ -18,6 +20,8 @@ class SecondActivity : AppCompatActivity() {
     var c2 : Card = Card(1,"Hearts") // Card object 2
 
     var coins : Int = 30
+
+    var wait : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -57,17 +61,30 @@ class SecondActivity : AppCompatActivity() {
     }
 
     fun runBet(guess : String){
+
+        if(wait){
+            return
+        }
+
         if (enterCoins.text.toString().toIntOrNull() == null){
             Toast.makeText(applicationContext, "Please enter coins", Toast.LENGTH_SHORT).show()
             return
         }
         showCardFront(2)
         if (guess == "hi" && c1.number < c2.number || guess == "lo" && c1.number > c2.number){
-            addCoins(enterCoins.text.toString().toInt())
+            addCoins(enterCoins.text.toString().toInt() / 2)
+            Toast.makeText(applicationContext, "Good choice!", Toast.LENGTH_SHORT).show()
         } else{
             removeCoins(enterCoins.text.toString().toInt())
+            Toast.makeText(applicationContext, "Too bad!", Toast.LENGTH_SHORT).show()
         }
         updateCoins()
+
+        wait = true
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            wait = false
+        }, 3000)
     }
 
 
