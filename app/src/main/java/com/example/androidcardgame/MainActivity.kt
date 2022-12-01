@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var button = findViewById<Button>(R.id.startButton)
+        var ruleButton = findViewById<Button>(R.id.rulesButton)
 
         button.setOnClickListener{
             val intent = Intent(this, SecondActivity::class.java)

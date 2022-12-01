@@ -57,7 +57,7 @@ class SecondActivity : AppCompatActivity() {
 
         // To here
 
-        //TO DO: Make game lost if coins hit 0,
+        //TO DO: Make game lost if coins hit 0, DONE
         //       Make game look nicer and make sure it works for different screen sizes
         //       Add animations of some sort?
         //       Add high-scores?
