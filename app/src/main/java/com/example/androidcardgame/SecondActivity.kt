@@ -1,5 +1,6 @@
 package com.example.androidcardgame
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -56,10 +57,10 @@ class SecondActivity : AppCompatActivity() {
 
         // To here
 
-        //TO DO: Make game lost if coins hit 0,
+        //TO DO: Make game lost if coins hit 0, DONE
         //       Make game look nicer and make sure it works for different screen sizes
         //       Add animations of some sort?
-        //       Add high-scores?
+        //       Add high-scores? REPLACE WITH RULES// Add rules
 
     }
 
@@ -76,7 +77,7 @@ class SecondActivity : AppCompatActivity() {
         }
         showCardFront(2) // reveal hidden card, and check if bet is "won"
         if (guess == "hi" && c1.number < c2.number || guess == "lo" && c1.number > c2.number){
-            addCoins(enterCoins.text.toString().toInt() / 2)
+            addCoins((enterCoins.text.toString().toInt() / 2) + 1)
             Toast.makeText(applicationContext, "Good choice!", Toast.LENGTH_SHORT).show()
         } else{
             removeCoins(enterCoins.text.toString().toInt())
@@ -94,6 +95,12 @@ class SecondActivity : AppCompatActivity() {
             showCardFront(1) // update left cards front
             showCardBack(2) // show back of right card
             randomiseCard(2) // randomise right card
+
+            if(coins < 1){
+                val intent = Intent(this,LoseActivity::class.java)
+                finish()
+                startActivity(intent)
+            }
 
         }, 3000)
     }
