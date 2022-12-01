@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
         }
+        ruleButton.setOnClickListener{
+            val intent = Intent(this, RulesActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
