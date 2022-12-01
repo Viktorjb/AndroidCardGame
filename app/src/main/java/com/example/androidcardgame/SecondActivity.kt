@@ -1,5 +1,6 @@
 package com.example.androidcardgame
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -94,6 +95,12 @@ class SecondActivity : AppCompatActivity() {
             showCardFront(1) // update left cards front
             showCardBack(2) // show back of right card
             randomiseCard(2) // randomise right card
+
+            if(coins < 1){
+                val intent = Intent(this,LoseActivity::class.java)
+                finish()
+                startActivity(intent)
+            }
 
         }, 3000)
     }
