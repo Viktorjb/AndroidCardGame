@@ -57,10 +57,7 @@ class SecondActivity : AppCompatActivity() {
 
         // To here
 
-        //TO DO: Make game lost if coins hit 0, DONE
-        //       Make game look nicer and make sure it works for different screen sizes
-        //       Add animations of some sort?
-        //       Add high-scores? REPLACE WITH RULES// Add rules
+
 
     }
 
@@ -71,10 +68,17 @@ class SecondActivity : AppCompatActivity() {
             return
         }
 
+        //If there's nothing, or letters, entered
         if (enterCoins.text.toString().toIntOrNull() == null){ //If there are no coins entered
             Toast.makeText(applicationContext, "Please enter coins", Toast.LENGTH_SHORT).show()
             return
         }
+        //If trying to bet more coins than you have
+        if (enterCoins.text.toString().toIntOrNull()!! > coins){
+            Toast.makeText(applicationContext,"You can't bet that much",Toast.LENGTH_SHORT).show()
+            return
+        }
+
         showCardFront(2) // reveal hidden card, and check if bet is "won"
         if (guess == "hi" && c1.number < c2.number || guess == "lo" && c1.number > c2.number){
             addCoins((enterCoins.text.toString().toInt() / 2) + 1)
